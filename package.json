@@ -1,0 +1,29 @@
+{
+  "name": "grouper",
+  "version": "1.0.0",
+  "description": "A discord bot to group people made in node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MartiLlorach/Grouper.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "grouper"
+  ],
+  "author": "Martí Llorach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MartiLlorach/Grouper/issues"
+  },
+  "homepage": "https://github.com/MartiLlorach/Grouper#readme",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0"
+  }
+}
