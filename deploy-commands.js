@@ -9,8 +9,7 @@ const commands = [
         .setName('group')
         .setDescription('Replies with the roles users')
         .addStringOption( option => option.setName('users').setDescription("Enumerate the users spaced by a colon"))
-        .addStringOption( option => option.setName('by').setDescription("groups*integrants ((+groups*integrants) if you want to define multiple groups) "))
-        .addBooleanOption( option => option.setName('round').setDescription("Rounds the groups so nobody ends alone (IN PROGRESS)")) 
+        .addStringOption( option => option.setName('by').setDescription("{groups}x{integrants}"))
 ]
     .map(command => command.toJSON());
 
