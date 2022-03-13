@@ -40,7 +40,7 @@ client.on('interactionCreate', async interaction => {
 					
 					let groups = [];
 					for (let nGroup=0; nGroup<groupOption[0]; nGroup++){
-						let newGroup;
+						let newGroup = [];
 						for (let nIntegrant=0; nIntegrant<groupOption[0]; nIntegrant++){
 							newGroup.push(users[0]);
 							users.shift();
@@ -49,15 +49,16 @@ client.on('interactionCreate', async interaction => {
 					}
 
 					let groupCounter = 1;
+
+					await interaction.reply("Grouping...");
+					let responseString = '';
 					groups.forEach( (group) => {
-						let responseString = `Group ${groupCounter}:`;
+						responseString += `Group ${groupCounter}:`;
 						group.forEach( integrant => responseString += ` ${integrant},` );
-						responseString.slice(0, -1);
-						if (groupCounter == 1) {
-							interaction.reply(responseString);
-						} else {
-							interaction.followUp(responseString);
-						}
+						responseString = responseString.slice(0, -1);
+						responseString += '\n';
+						interaction.editReply(responseString);
+						groupCounter++;
 					});
 
 					
@@ -69,9 +70,7 @@ client.on('interactionCreate', async interaction => {
 			}
 			
 		} catch (error) {
-			
-			await interaction.reply(error)
-			
+			interaction.reply({ content: error, ephemeral: true });
 		}
 	}
 })
