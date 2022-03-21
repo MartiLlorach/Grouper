@@ -29,29 +29,27 @@ client.on('interactionCreate', async interaction => {
 				if (optionMap['by']) {
 					
 					let users = optionMap['users'].value;
+					users.split(" ").join("");
 					users = users.split(',').sort((a, b) => 0.5 - Math.random());
-					
-					console.log("users definidos");
-					console.log(users)
-					
-					let groupOption = optionMap['by'].value;
-					groupOption = groupOption.split('x');
-					if (groupOption.some(isNaN)) throw 'SyntaxError: Bad group syntax';
-					
+							
+					let nUsers = parseInt(optionMap['by'].value);
+
+					let nGroups = Math.trunc((users.length)/nUsers);
+
 					let groups = [];
-					for (let nGroup=0; nGroup<groupOption[0]; nGroup++){
-						let newGroup = [];
-						for (let nIntegrant=0; nIntegrant<groupOption[0]; nIntegrant++){
-							newGroup.push(users[0]);
-							users.shift();
+					for (let i = 0; i < nGroups; i++) {
+						let tempgroup = []
+						for (let j = 0; j < nUsers; j++) {
+							let user = users.shift()
+							tempgroup.push(user)
 						}
-						groups.push(newGroup);
+						groups.push(tempgroup)
 					}
 
-					let groupCounter = 1;
 
 					await interaction.reply("Grouping...");
 					let responseString = '';
+					let groupCounter = 0;
 					groups.forEach( (group) => {
 						responseString += `Group ${groupCounter}:`;
 						group.forEach( integrant => responseString += ` ${integrant},` );
@@ -60,10 +58,17 @@ client.on('interactionCreate', async interaction => {
 						interaction.editReply(responseString);
 						groupCounter++;
 					});
+					if (!users.length == 0) {
+						responseString += 'Extras:';
+						users.forEach( integrant => responseString += ` ${integrant},` );
+						responseString = responseString.slice(0, -1);
+						responseString += '\n';
+						interaction.editReply(responseString);
+					}
 
 					
 				} else {
-					throw 'Error: No groups provided';
+					throw 'Error: No users for group provided';
 				}
 			} else {
 				throw 'Error: No users provided';

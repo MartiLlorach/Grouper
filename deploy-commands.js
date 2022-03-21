@@ -7,9 +7,9 @@ const commands = [
     new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
     new SlashCommandBuilder()
         .setName('group')
-        .setDescription('Replies with the roles users')
-        .addStringOption( option => option.setName('users').setDescription("Enumerate the users spaced by a colon"))
-        .addStringOption( option => option.setName('by').setDescription("{groups}x{integrants}"))
+        .setDescription('Replies with the groups')
+        .addStringOption( option => option.setName('users').setDescription("Enumerate the users spaced by a colon (a,b,c,...)"))
+        .addStringOption( option => option.setName('by').setDescription("How many integrants per group (integer)"))
 ]
     .map(command => command.toJSON());
 
